@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .navigation {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        .navigation a.active {
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            bottom: 0;
+            width: 100%;
+        }
+        .my-active-class {
+            text-decoration: underline !important;
+        font-weight: bold;
+        /* Agrega cualquier estilo adicional que desees */
+        }
+    
+    </style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiniela Pitera</title>
+
+</head>
+<body>
+<div class="header">
+    <h1>Quiniela Pitera</h1>
+</div>
+<div class="navigation">
+    <a href="{% url 'principal' %}" {% if page == "principal" %} class="my-active-class" {% endif %}>Inicio</a>
+    <a href="{% url 'jornadas' %}" {% if page == "jornadas" %} class="my-active-class" {% endif %}>Jornadas</a>
+    <a href="{% url 'ingresar_resultado' %}" {% if page == "ingresar_resultado" %} class="my-active-class" {% endif %}>Llenar Quiniela</a>
+    <a href="{% url 'tabla_general' %}" {% if page == "tabla_general" %} class="my-active-class" {% endif %}>Tabla General</a>
+</div>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<div class="footer">
+    <p>Derechos Reservados &copy; 2024 Quiniela Pitera</p>
+</div>
+</body>
+</html>
+

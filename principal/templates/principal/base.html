@@ -1,0 +1,101 @@
+<style>
+
+/* Estilo base para las celdas de la tabla */
+table {
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid blue;
+    padding: 8px;
+    text-align: left;
+    font-size: 16px; /* Tamaño de letra base */
+}
+
+/* Clase para la lista horizontal */
+.horizontal-list {
+    display: flex;
+    flex-wrap: nowrap; /* No permitir el ajuste de línea */
+    margin-bottom: 20px; /* Espaciado entre las listas */
+}
+
+.horizontal-list li {
+    margin-right: 25px; /* Espaciado entre elementos en la lista horizontal */
+}
+
+img {
+    max-width: 100%; /* Hace que la imagen no sea más ancha que el contenedor */
+    height: auto; /* Mantiene la proporción de aspecto */
+}
+
+/* Media query para pantallas de hasta 600px de ancho */
+@media screen and (max-width: 600px) {
+    td, th {
+        font-size: 14px; /* Tamaño de letra más pequeño para pantallas pequeñas */
+    }
+}
+
+/* Media query para pantallas de hasta 400px de ancho */
+@media screen and (max-width: 400px) {
+    td, th {
+        font-size: 5px;
+        padding: 0;
+        width: 10;
+        height: 10;}
+    
+    .horizontal-list{
+        font-size: 5 px;
+    }
+
+    img {
+        max-width: 80%; /* Hace que la imagen sea un 80% del ancho del contenedor */
+    }
+
+    canvas {
+            border: 1px solid black;
+            max-width: 100%;
+            height: auto;
+        }
+    
+}
+
+</style>
+
+<!DOCTYPE html>
+<html lang="es">
+
+
+    
+<head>
+<meta charset="UTF-8">
+
+<title>Quiniela Pitera</title>
+<!-- Styles -->
+</head>
+<body>
+<div style="background-color: #333; color: #fff; padding: 10px; text-align: center;">
+    <h1>Quiniela Pitera</h1>
+</div>
+<div style="background-color: #333; padding: 10px; text-align: center; font-weight: bold;">
+    <a style = "color: #fff;" href="{% url 'principal' %}" {% if page == "principal" %} class="my-active-class" {% endif %}>Inicio</a>
+    <a style = "color: #fff;" href="{% url 'jornadas' %}" {% if page == "jornadas" %} class="my-active-class" {% endif %}>Jornadas</a>
+    <a style = "color: #fff;" href="{% url 'ingresar_resultado' %}" {% if page == "ingresar_resultado" %} class="my-active-class" {% endif %}>Llenar Quiniela</a>
+    <a style = "color: #fff;" href="{% url 'tabla_general' %}" {% if page == "tabla_general" %} class="my-active-class" {% endif %}>Tabla General</a>
+</div>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<div style="background-color: #333;
+color: #fff;
+padding: 10px;
+text-align: center;
+bottom: 0;
+width: 100%;">
+    <p>Derechos Reservados &copy; 2024 Quiniela Pitera</p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,735 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+<!-- Lista horizontal -->
+<body style="background-color: rgb(180, 180, 180);">
+
+<p style="text-align: center; color: black; background-color: rgb(200, 200, 200); font-size: 25px;"> <b>1. SELECCIONA TU NOMBRE </b></p>
+
+<form id="miFormulario" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;" style="background-color: rgb(180, 180, 180);">
+    {% csrf_token %}
+    <label for="cartas">Nombre:</label>
+    <select id="cartas" name="cartas" onchange="document.getElementById('miFormulario').submit()">
+        {% for valor in cartas %}
+            <option value="{{ valor.nombre }} {{ valor.carta }}" {% if valor.nombre == carta_seleccionada %} selected {% endif %}>{{valor.nombre}} ({{valor.carta}})</option>
+        {% endfor %}
+    </select>
+</form>
+
+<p style="text-align: center; font-size: 25px; background-color: rgb(200, 200, 200);"><strong>2. OBSERVA LA CARTA QUE TE TOCÓ Y COMO USARLA</strong> </p>
+
+<body>
+    <div style="text-align: center; background-color: rgb(180, 180, 180);">
+        {% for dato in foto_url %}
+            <img src="data:image/png;base64,{{ dato.foto }}" alt="Imagen específica">
+        {% endfor %}
+    </div>
+</body>
+
+<div style="text-align: center; font-size: 40px; background-color: rgb(180, 180, 180);">
+    <p>{{ consejo }}</p>
+</div>
+
+<body>
+    <p style="text-align: center; font-size: 18px; background-color: rgb(120, 120, 120);"><strong></strong> NOTA: LAS CARTAS SOLO APLICAN A LOS 11 JUEGOS DE LA JORNADA, NO A LOS PENDIENTES </p>
+    <p style="text-align: center; font-size: 25px; background-color: rgb(200, 200, 200);"><strong> 3. RELLENA TU QUINIELA Y GUARDA LAS PREDICCIONES</strong> </p>
+    <p style="text-align: center; font-size: 25px; background-color: rgb(180, 180, 180);"> Avisa a choco cuando mandes tu quiniela para comprobar que todo está bien </p>
+</body>
+</body>
+{% for d in diccio_equipos %}
+{% for f in fotos_equipos %}
+{% if carta_quiniela == "NC" or carta_quiniela == "IQ" %}
+<!-- NC, IQ -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center; background-color: rgb(180, 180, 180);">
+        {% csrf_token %}
+        <!-- 1 -->
+        
+        <input type="radio" name="partido1" value="L">&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1" value="E">&nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1" value="V"> <br> <br> 
+
+        <!-- 2 -->
+        <input type="radio" name="partido2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2" value="V"> <br> <br> 
+
+        <!-- 3 -->
+        <input type="radio" name="partido3" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="radio" name="partido4" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="radio" name="partido5" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="radio" name="partido6" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="radio" name="partido7" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="radio" name="partido8" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="radio" name="partido9" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="radio" name="partido10" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="radio" name="partido11" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11" value="V"> <br><br>
+        
+        
+
+
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+
+        <!--<p style="font-size: 25px;"><b> NO HAY JUEGOS PENDIENTES </b></p><br><br> -->
+        <p style="font-size: 25px;"><b>JUEGOS PENDIENTES </b></p>
+        <p style="font-size: 20px;"><b>Manda por mensaje de whatsapp, como se te pegue tu chingada gana, los resultados de los juegos pendientes. </b></p>
+        {% for jp in Juegos_pendientes%}
+        <p>{{jp.nombre}}</p>
+        {% endfor %}
+
+        <button type="submit" >Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+
+{% if carta_quiniela == "DQ" %}
+<!-- DQ -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center; background-color: rgb(180, 180, 180);">
+        {% csrf_token %}
+
+        <label style="text-align: center; background-color: rgb(180, 180, 180); font-size: 18;"><b> QUINIELA 1 </b></label><br><br>
+
+        <!-- 1 -->
+        <input type="radio" name="partido1DQ1" value="L"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1DQ1" value="E"> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1DQ1" value="V"> <br><br>
+
+        <!-- 2 -->
+        <input type="radio" name="partido2DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2DQ1" value="V"> <br><br>
+
+        <!-- 3 -->
+        <input type="radio" name="partido3DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3DQ1" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="radio" name="partido4DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4DQ1" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="radio" name="partido5DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5DQ1" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="radio" name="partido6DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6DQ1" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="radio" name="partido7DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7DQ1" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="radio" name="partido8DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8DQ1" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="radio" name="partido9DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9DQ1" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="radio" name="partido10DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10DQ1" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="radio" name="partido11DQ1" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11DQ1" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11DQ1" value="V"> <br><br>
+
+        <label style="text-align: center; background-color: rgb(180, 180, 180); font-size: 18;"><b> QUINIELA 2 </b></label><br><br>
+
+        <!-- 1 -->
+        <input type="radio" name="partido1DQ2" value="L"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1DQ2" value="E"> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1DQ2" value="V"> <br><br>
+
+        <!-- 2 -->
+        <input type="radio" name="partido2DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2DQ2" value="V"> <br><br>
+
+        <!-- 3 -->
+        <input type="radio" name="partido3DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3DQ2" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="radio" name="partido4DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4DQ2" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="radio" name="partido5DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5DQ2" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="radio" name="partido6DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6DQ2" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="radio" name="partido7DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7DQ2" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="radio" name="partido8DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8DQ2" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="radio" name="partido9DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9DQ2" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="radio" name="partido10DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10DQ2" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="radio" name="partido11DQ2" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11DQ2" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11DQ2" value="V"> <br><br>
+        
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+
+        <button type="submit">Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+
+{% if carta_quiniela == "OD" or carta_quiniela == "OT" %}
+<!-- OD, OT -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;">
+        {% csrf_token %}
+        <!-- 1 -->
+        <input type="checkbox" id='partido1LCH' name="partido1CH" value="L"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="checkbox" id='partido1ECH' name="partido1CH" value="E"> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="checkbox" id='partido1VCH' name="partido1CH" value="V"> <br><br>
+
+        <!-- 2 -->
+        <input type="checkbox" name="partido2CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="checkbox" name="partido2CH" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="checkbox" name="partido2CH" value="V"> <br><br>
+
+        <!-- 3 -->
+        <input type="checkbox" name="partido3CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="checkbox" name="partido3CH" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="checkbox" name="partido3CH" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="checkbox" name="partido4CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="checkbox" name="partido4CH" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="checkbox" name="partido4CH" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="checkbox" name="partido5CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="checkbox" name="partido5CH" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="checkbox" name="partido5CH" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="checkbox" name="partido6CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="checkbox" name="partido6CH" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="checkbox" name="partido6CH" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="checkbox" name="partido7CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="checkbox" name="partido7CH" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="checkbox" name="partido7CH" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="checkbox" name="partido8CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="checkbox" name="partido8CH" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="checkbox" name="partido8CH" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="checkbox" name="partido9CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="checkbox" name="partido9CH" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="checkbox" name="partido9CH" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="checkbox" name="partido10CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="checkbox" name="partido10CH" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="checkbox" name="partido10CH" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="checkbox" name="partido11CH" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="checkbox" name="partido11CH" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="checkbox" name="partido11CH" value="V"> <br><br>
+
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+        
+        <button type="submit">Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+{% if carta_quiniela == "MA" %}
+<!-- MA -->
+
+<form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;">
+    {% csrf_token %}
+    <!-- 1 -->
+    <label for="partido1MA"></label>
+    <input type="text" name="partido1LMA" size="1"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+    <input type="text" name="partido1VMA" size="1">
+    <br><br>
+
+    <!-- 2 -->
+    <label for="partido2MA"></label>
+    <input type="text" name="partido2LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+    <input type="text" name="partido2VMA" size="1">
+    <br><br>
+
+    <!-- 3 -->
+    <label for="partido3MA"></label>
+    <input type="text" name="partido3LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+    <input type="text" name="partido3VMA" size="1">
+    <br><br>
+
+    <!-- 4 -->
+    <label for="partido4MA"></label>
+    <input type="text" name="partido4LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+    <input type="text" name="partido4VMA" size="1">
+    <br><br>
+
+    <!-- 5 -->
+    <label for="partido5MA"></label>
+    <input type="text" name="partido5LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+    <input type="text" name="partido5VMA" size="1">
+    <br><br>
+
+    <!-- 6 -->
+    <label for="partido6MA"></label>
+    <input type="text" name="partido6LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+    <input type="text" name="partido6VMA" size="1">
+    <br><br>
+
+    <!-- 7 -->
+    <label for="partido7MA"></label>
+    <input type="text" name="partido7LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+    <input type="text" name="partido7VMA" size="1">
+    <br><br>
+
+    <!-- 8 -->
+    <label for="partido8MA"></label>
+    <input type="text" name="partido8LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+    <input type="text" name="partido8VMA" size="1">
+    <br><br>
+
+    <!-- 9 -->
+    <label for="partido9MA"></label>
+    <input type="text" name="partido9LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+    <input type="text" name="partido9VMA" size="1">
+    <br><br>
+
+    <!-- 10 -->
+    <label for="partido10MA"></label>
+    <input type="text" name="partido10LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+    <input type="text" name="partido10VMA" size="1">
+    <br><br>
+
+    <!-- 11 -->
+    <label for="partido11MA"></label>
+    <input type="text" name="partido11LMA" size="1"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}} <span style="margin-right: 20px;"></span> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+    <input type="text" name="partido11VMA" size="1">
+    <br><br>
+
+    <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+
+    <button type="submit">Guardar Predicciones</button>
+</form>
+{% endif %}
+{% if carta_quiniela == "M" %}
+<!-- M -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;">
+        {% csrf_token %}
+        <!-- 1 -->
+        1.&nbsp;&nbsp;<input type="radio" name="partido1M" value="L"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1M" value="E"> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1M" value="V"> <br><br>
+
+        <!-- 2 -->
+        2.&nbsp;&nbsp;<input type="radio" name="partido2M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2M" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2M" value="V"> <br><br>
+
+        <!-- 3 -->
+        3.&nbsp;&nbsp;<input type="radio" name="partido3M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3M" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3M" value="V"> <br><br>
+
+        <!-- 4 -->
+        4.&nbsp;&nbsp;<input type="radio" name="partido4M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4M" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4M" value="V"> <br><br>
+
+        <!-- 5 -->
+        5.&nbsp;&nbsp;<input type="radio" name="partido5M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5M" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5M" value="V"> <br><br>
+
+        <!-- 6 -->
+        6.&nbsp;&nbsp;<input type="radio" name="partido6M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6M" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6M" value="V"> <br><br>
+
+        <!-- 7 -->
+        7.&nbsp;&nbsp;<input type="radio" name="partido7M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7M" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7M" value="V"> <br><br>
+
+        <!-- 8 -->
+        8.&nbsp;&nbsp;<input type="radio" name="partido8M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8M" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8M" value="V"> <br><br>
+
+        <!-- 9 -->
+        9.&nbsp;&nbsp;<input type="radio" name="partido9M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9M" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9M" value="V"> <br><br>
+
+        <!-- 10 -->
+        10.&nbsp;&nbsp;<input type="radio" name="partido10M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10M" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10M" value="V"> <br><br>
+
+        <!-- 11 -->
+        11.&nbsp;&nbsp;<input type="radio" name="partido11M" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11M" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11M" value="V"> <br> <br> <br>
+        
+        <label> Selecciona un equipo </label> <br> 
+        <select id="eq_selM" name="equipo_seleccionadoM">
+            {% for valor in equipos_multi %}
+                <option value="{{ valor.equipo }}" >{{valor.equipo}}</option>
+            {% endfor %}
+        </select><br> <br> <br>
+        <!--
+        <label> Del 1 a 11, escoge en que juego quieres usar tu multiplicador </label> <br> 
+        <input type="text" name="multi"><br> <br> <br>
+        -->
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+        
+        <button type="submit">Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+{% if carta_quiniela == "J" %}
+<!-- J -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;">
+        {% csrf_token %}
+        <!-- 1 -->
+        <input type="radio" name="partido1J" value="L"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1J" value="E"> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1J" value="V"> <br><br>
+
+        <!-- 2 -->
+        <input type="radio" name="partido2J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2J" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2J" value="V"> <br><br>
+
+        <!-- 3 -->
+        <input type="radio" name="partido3J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3J" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3J" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="radio" name="partido4J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4J" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4J" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="radio" name="partido5J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5J" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5J" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="radio" name="partido6J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6J" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6J" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="radio" name="partido7J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7J" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7J" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="radio" name="partido8J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8J" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8J" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="radio" name="partido9J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9J" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9J" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="radio" name="partido10J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10J" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10J" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="radio" name="partido11J" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11J" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11J" value="V"> <br> <br> <br>
+        
+
+        <label> Selecciona un equipo </label> <br> 
+        <select id="eq_sel" name="equipo_seleccionado">
+            {% for valor in equipos_disponibles %}
+                <option value="{{ valor.equipo }}" >{{valor.equipo}}</option>
+            {% endfor %}
+        </select><br> <br> <br>
+
+        <label> Jugador 1 </label> <br> 
+        
+        <input type="text" name="jug"><br>
+
+        <label> Jugador 2 </label> <br> 
+
+        <input type="text" name="jug2"><br> <br> <br>
+
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+        
+        <button type="submit">Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+
+{% if carta_quiniela == "T" %}
+<!-- T -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;">
+        {% csrf_token %}
+        <!-- 1 -->
+        <input type="radio" name="partido1T" value="L"> &nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1T" value="E"> &nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1T" value="V"> <br><br>
+
+        <!-- 2 -->
+        <input type="radio" name="partido2T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2T" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2T" value="V"> <br><br>
+
+        <!-- 3 -->
+        <input type="radio" name="partido3T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3T" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3T" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="radio" name="partido4T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4T" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4T" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="radio" name="partido5T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5T" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5T" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="radio" name="partido6T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6T" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6T" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="radio" name="partido7T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7T" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7T" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="radio" name="partido8T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8T" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8T" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="radio" name="partido9T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9T" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9T" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="radio" name="partido10T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10T" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10T" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="radio" name="partido11T" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11T" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11T" value="V"> <br> <br> <br>
+        
+        <label> Selecciona un equipo </label> <br> 
+        <select id="eq_sel" name="equipo_seleccionado">
+            {% for valor in equipos_tiempo %}
+                <option value="{{ valor.equipo }}" >{{valor.equipo}}</option>
+            {% endfor %}
+        </select><br> <br> <br>
+
+        <label> Escribe el minuto en el que inicia y en el que termina tu rango (solo escribe en numero)</label> <br> 
+
+        <label> Inicio:      </label>  
+
+        <input type="text" name="tiempo_gol_inicio"><br> 
+
+        <label> Final:      </label>  
+
+        <input type="text" name="tiempo_gol_final"><br> <br> <br>
+
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+        
+        <button type="submit">Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+
+{% if carta_quiniela == "E"%}
+<!-- E -->
+
+<body>
+    <form id="prediccionesForm" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center; background-color: rgb(180, 180, 180);">
+        {% csrf_token %}
+        <!-- 1 -->
+        
+        <input type="radio" name="partido1E" value="L">&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq1_j1 }}" width="30" height="30"> &nbsp;&nbsp;{{d.eq1_j1}}
+        <input type="radio" name="partido1E" value="E">&nbsp;&nbsp; {{d.eq2_j1}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j1 }}" width="30" height="30">
+        <input type="radio" name="partido1E" value="V"> <br> <br> 
+
+        <!-- 2 -->
+        <input type="radio" name="partido2E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j2 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j2}}
+        <input type="radio" name="partido2E" value="E"> &nbsp;&nbsp;{{d.eq2_j2}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j2 }}" width="30" height="30">
+        <input type="radio" name="partido2E" value="V"> <br> <br> 
+
+        <!-- 3 -->
+        <input type="radio" name="partido3E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j3 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j3}}
+        <input type="radio" name="partido3E" value="E"> &nbsp;&nbsp;{{d.eq2_j3}}&nbsp;&nbsp; <img src="data:image/png;base64,{{ f.eq2_j3 }}" width="30" height="30">
+        <input type="radio" name="partido3E" value="V"> <br><br>
+
+        <!-- 4 -->
+        <input type="radio" name="partido4E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j4 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j4}}
+        <input type="radio" name="partido4E" value="E"> &nbsp;&nbsp;{{d.eq2_j4}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j4 }}" width="30" height="30">
+        <input type="radio" name="partido4E" value="V"> <br><br>
+
+        <!-- 5 -->
+        <input type="radio" name="partido5E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j5 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j5}}
+        <input type="radio" name="partido5E" value="E"> &nbsp;&nbsp;{{d.eq2_j5}} &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j5 }}" width="30" height="30">
+        <input type="radio" name="partido5E" value="V"> <br><br>
+
+        <!-- 6 -->
+        <input type="radio" name="partido6E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j6 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j6}}
+        <input type="radio" name="partido6E" value="E"> &nbsp;&nbsp;{{d.eq2_j6}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j6 }}" width="30" height="30">
+        <input type="radio" name="partido6E" value="V"> <br><br>
+
+        <!-- 7 -->
+        <input type="radio" name="partido7E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j7 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j7}}
+        <input type="radio" name="partido7E" value="E"> &nbsp;&nbsp;{{d.eq2_j7}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j7 }}" width="30" height="30">
+        <input type="radio" name="partido7E" value="V"> <br><br>
+
+        <!-- 8 -->
+        <input type="radio" name="partido8E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j8 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j8}}
+        <input type="radio" name="partido8E" value="E"> &nbsp;&nbsp;{{d.eq2_j8}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j8 }}" width="30" height="30">
+        <input type="radio" name="partido8E" value="V"> <br><br>
+
+        <!-- 9 -->
+        <input type="radio" name="partido9E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j9 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j9}}
+        <input type="radio" name="partido9E" value="E"> &nbsp;&nbsp;{{d.eq2_j9}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j9 }}" width="30" height="30">
+        <input type="radio" name="partido9E" value="V"> <br><br>
+
+        <!-- 10 -->
+        <input type="radio" name="partido10E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j10 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j10}}
+        <input type="radio" name="partido10E" value="E"> &nbsp;&nbsp;{{d.eq2_j10}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j10 }}" width="30" height="30">
+        <input type="radio" name="partido10E" value="V"> <br><br>
+
+        <!-- 11 -->
+        <input type="radio" name="partido11E" value="L"> &nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq1_j11 }}" width="30" height="30">&nbsp;&nbsp;{{d.eq1_j11}}
+        <input type="radio" name="partido11E" value="E"> &nbsp;&nbsp;{{d.eq2_j11}}&nbsp;&nbsp;<img src="data:image/png;base64,{{ f.eq2_j11 }}" width="30" height="30">
+        <input type="radio" name="partido11E" value="V"> <br><br>
+        
+        <label> Selecciona un equipo </label> <br> 
+        <select id="eq_sel" name="equipo_seleccionado">
+            {% for valor in equipos_tiempo %}
+                <option value="{{ valor.equipo }}" >{{valor.equipo}}</option>
+            {% endfor %}
+        </select><br> <br> <br>
+
+        <label> Este equipo va a tener: </label> <br>
+        <input type="radio" name="OE1" value="-"> Menos de {{momios.0.mom1}} goles &nbsp;&nbsp;&nbsp;&nbsp;
+        Mas de {{momios.0.mom1}} goles
+        <input type="radio" name="OE1" value="+"> <br>
+        <input type="radio" name="OE2" value="-"> Menos de {{momios.0.mom2}} tarjetas &nbsp;&nbsp;&nbsp;&nbsp;
+        Mas de {{momios.0.mom2}} tarjetas
+        <input type="radio" name="OE2" value="+"> <br>
+        <input type="radio" name="OE3" value="-"> Menos de {{momios.0.mom3}} tiros esq. &nbsp;&nbsp;&nbsp;&nbsp;
+        Mas de {{momios.0.mom3}} tiros esq.
+        <input type="radio" name="OE3" value="+"> <br>
+
+
+        <input type="hidden" name="nombre_j" value={{carta_seleccionada}}>
+
+        <!--<p style="font-size: 25px;"><b> NO HAY JUEGOS PENDIENTES </b></p><br><br> -->
+        <p style="font-size: 25px;"><b>JUEGOS PENDIENTES </b></p>
+        <p style="font-size: 20px;"><b>Manda por mensaje de whatsapp, como se te pegue tu chingada gana, los resultados de los juegos pendientes. </b></p>
+        {% for jp in Juegos_pendientes%}
+        <p>{{jp.nombre}}</p>
+        {% endfor %}
+
+        <button type="submit" >Guardar Predicciones</button>
+    </form>
+</body>
+{% endif %}
+
+
+{% endfor %}
+{% endfor %}
+{% endblock %}

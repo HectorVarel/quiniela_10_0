@@ -1,0 +1,114 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.navigation {
+    background-color: #444;
+    padding: 10px;
+    text-align: center;
+}
+
+.navigation a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+.navigation a.active {
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+.my-active-class {
+    text-decoration: underline !important;
+    font-weight: bold;
+    /* Agrega cualquier estilo adicional que desees */
+}
+
+/* Estilo base para las celdas de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid blue;
+    padding: 0px;
+    text-align: left;
+    font-size: 16px; /* Tamaño de letra base */
+}
+
+/* Clase para la lista horizontal */
+.horizontal-list {
+    display: flex;
+    flex-wrap: nowrap; /* No permitir el ajuste de línea */
+    margin-bottom: 20px; /* Espaciado entre las listas */
+}
+
+.horizontal-list li {
+    margin-right: 25px; /* Espaciado entre elementos en la lista horizontal */
+}
+
+img {
+    max-width: 100%; /* Hace que la imagen no sea más ancha que el contenedor */
+    height: auto; /* Mantiene la proporción de aspecto */
+}
+
+/* Media query para pantallas de hasta 600px de ancho */
+@media screen and (max-width: 600px) {
+    td, th {
+        font-size: 14px; /* Tamaño de letra más pequeño para pantallas pequeñas */
+    }
+}
+
+/* Media query para pantallas de hasta 400px de ancho */
+@media screen and (max-width: 400px) {
+    td, th {
+        font-size: 5px;
+        padding-left: 0;
+        padding-right: 0;
+        width: 10;
+        height: 10;}
+    
+    .horizontal-list{
+        font-size: 5 px;
+    }
+
+    img {
+        max-width: 80%; /* Hace que la imagen sea un 80% del ancho del contenedor */
+    }
+
+    canvas {
+        border: 1px solid black;
+        max-width: 100%;
+        height: auto;
+    }
+    
+}
+
+
+
+

@@ -1,0 +1,84 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        text-align: center; /* Centrar el contenido de la página */
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 80%; /* Ancho de la tabla */
+        margin: 0 auto; /* Centrar la tabla horizontalmente */
+    }
+    th, td {
+        padding: 5px; /* Espacio interno de las celdas */
+        border: 1px solid #ddd; /* Borde de las celdas */
+        text-align: center; /* Centrar el contenido de las celdas */
+    }
+    th {
+        background-color: lightblue; /* Color de fondo para las celdas de encabezado */
+        color: white; /* Color de texto para las celdas de encabezado */
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Color de fondo para filas pares */
+    }
+</style>
+
+<h1>Tabla General</h1>
+
+    <!-- Tabla para mostrar las jornadas -->
+    <table>
+            <tr>
+                <th>Nombre</th>
+                <th>J1</th>
+                <th>J2</th>
+                <th>J3</th>
+                <th>J4</th>
+                <th>J5</th>
+                <th>J6</th>
+                <th>J7</th>
+                <th>J8</th>
+                <th>J9</th>
+                <th>J10</th>
+                <th>J11</th>
+                <th>J12</th>
+                <th>J13</th>
+                <th>J14</th>
+                <th>J15</th>
+                <th>J16</th>
+                <th>J17</th>
+                <th>Suma</th>
+            </tr>
+            {% for jornada in jornadas %}
+            <tr>
+                <td style="background-color: aquamarine;">{{ jornada.nombre }}</td>
+                <td style="background-color: {% if jornada.j1 > 0 and jornada.j1 <= 2 %}red{% elif jornada.j1 == 0 %}white{% elif jornada.j1 >= 3 and jornada.j1 <= 6 %}yellow{% elif jornada.j1 >= 7 and jornada.j1 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j1 }}</td>
+                <td style="background-color: {% if jornada.j2 > 0 and jornada.j2 <= 2 %}red{% elif jornada.j2 == 0 %}white{% elif jornada.j2 >= 3 and jornada.j2 <= 6 %}yellow{% elif jornada.j2 >= 7 and jornada.j2 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j2 }}</td>
+                <td style="background-color: {% if jornada.j3 > 0 and jornada.j3 <= 2 %}red{% elif jornada.j3 == 0 %}white{% elif jornada.j3 >= 3 and jornada.j3 <= 6 %}yellow{% elif jornada.j3 >= 7 and jornada.j3 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j3 }}</td>
+                <td style="background-color: {% if jornada.j4 > 0 and jornada.j4 <= 2 %}red{% elif jornada.j4 == 0 %}white{% elif jornada.j4 >= 3 and jornada.j4 <= 6 %}yellow{% elif jornada.j4 >= 7 and jornada.j4 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j4 }}</td>
+                <td style="background-color: {% if jornada.j5 > 0 and jornada.j5 <= 2 %}red{% elif jornada.j5 == 0 %}white{% elif jornada.j5 >= 3 and jornada.j5 <= 6 %}yellow{% elif jornada.j5 >= 7 and jornada.j5 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j5 }}</td>
+                <td style="background-color: {% if jornada.j6 > 0 and jornada.j6 <= 2 %}red{% elif jornada.j6 == 0 %}white{% elif jornada.j6 >= 3 and jornada.j6 <= 6 %}yellow{% elif jornada.j6 >= 7 and jornada.j6 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j6 }}</td>
+                <td style="background-color: {% if jornada.j7 > 0 and jornada.j7 <= 2 %}red{% elif jornada.j7 == 0 %}white{% elif jornada.j7 >= 3 and jornada.j7 <= 6 %}yellow{% elif jornada.j7 >= 7 and jornada.j7 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j7 }}</td>
+                <td style="background-color: {% if jornada.j8 > 0 and jornada.j8 <= 2 %}red{% elif jornada.j8 == 0 %}white{% elif jornada.j8 >= 3 and jornada.j8 <= 6 %}yellow{% elif jornada.j8 >= 7 and jornada.j8 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j8 }}</td>
+                <td style="background-color: {% if jornada.j9 > 0 and jornada.j9 <= 2 %}red{% elif jornada.j9 == 0 %}white{% elif jornada.j9 >= 3 and jornada.j9 <= 6 %}yellow{% elif jornada.j9 >= 7 and jornada.j9 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j9 }}</td>
+                <td style="background-color: {% if jornada.j10 > 0 and jornada.j10 <= 2 %}red{% elif jornada.j10 == 0 %}white{% elif jornada.j10 >= 3 and jornada.j10 <= 6 %}yellow{% elif jornada.j10 >= 7 and jornada.j10 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j10 }}</td>
+                <td style="background-color: {% if jornada.j11 > 0 and jornada.j11 <= 2 %}red{% elif jornada.j11 == 0 %}white{% elif jornada.j11 >= 3 and jornada.j11 <= 6 %}yellow{% elif jornada.j11 >= 7 and jornada.j11 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j11 }}</td>
+                <td style="background-color: {% if jornada.j12 > 0 and jornada.j12 <= 2 %}red{% elif jornada.j12 == 0 %}white{% elif jornada.j12 >= 3 and jornada.j12 <= 6 %}yellow{% elif jornada.j12 >= 7 and jornada.j12 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j12 }}</td>
+                <td style="background-color: {% if jornada.j13 > 0 and jornada.j13 <= 2 %}red{% elif jornada.j13 == 0 %}white{% elif jornada.j13 >= 3 and jornada.j13 <= 6 %}yellow{% elif jornada.j13 >= 7 and jornada.j13 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j13 }}</td>
+                <td style="background-color: {% if jornada.j14 > 0 and jornada.j14 <= 2 %}red{% elif jornada.j14 == 0 %}white{% elif jornada.j14 >= 3 and jornada.j14 <= 6 %}yellow{% elif jornada.j14 >= 7 and jornada.j14 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j14 }}</td>
+                <td style="background-color: {% if jornada.j15 > 0 and jornada.j15 <= 2 %}red{% elif jornada.j15 == 0 %}white{% elif jornada.j15 >= 3 and jornada.j15 <= 6 %}yellow{% elif jornada.j15 >= 7 and jornada.j15 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j15 }}</td>
+                <td style="background-color: {% if jornada.j16 > 0 and jornada.j16 <= 2 %}red{% elif jornada.j16 == 0 %}white{% elif jornada.j16 >= 3 and jornada.j16 <= 6 %}yellow{% elif jornada.j16 >= 7 and jornada.j16 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j16 }}</td>
+                <td style="background-color: {% if jornada.j17 > 0 and jornada.j17 <= 2 %}red{% elif jornada.j17 == 0 %}white{% elif jornada.j17 >= 3 and jornada.j17 <= 6 %}yellow{% elif jornada.j17 >= 7 and jornada.j17 <= 9 %}lightgreen{% else %}darkgreen{% endif %}">{{ jornada.j17 }}</td>
+                <td style="background-color: aquamarine;">{{jornada.suma_j}}</td>
+
+            </tr>
+            {% endfor %}
+    </table>
+
+
+{% endblock %}

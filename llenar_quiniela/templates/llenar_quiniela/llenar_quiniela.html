@@ -1,0 +1,34 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+
+<!-- Lista horizontal -->
+<p style="font-size: 20px; text-align: center;">
+    CARTAS DISPONIBLES
+</p>
+
+<ul style="background-color: rgb(180, 180, 180);">
+    <li>OD: Opción Doble</li>
+    <li>OT: Opción Triple</li>
+    <li>DQ: Doble Quiniela</li>
+    <li>M: Multiplicador</li>
+    <li>J: Jugador Gol</li>
+    <li>MA: Marcador</li>
+    <li>RC: Roba Carta</li>
+    <li>IQ: Intercambio de Quiniela</li>
+    <li>NC: No Carta</li>
+</ul>
+
+<form id="miFormulario" action="{% url 'ingresar_resultado' %}" method="post" style="text-align: center;" style="background-color: rgb(180, 180, 180);">
+    {% csrf_token %}
+    <label for="cartas">Selecciona tu nombre:</label>
+    <select style="margin-bottom: 450px;" id="cartas" name="cartas" onchange="document.getElementById('miFormulario').submit()">
+        {% for valor in cartas %}
+            <option value="{{ valor.nombre }} {{ valor.carta }}" {% if valor.nombre == carta_seleccionada %} selected {% endif %}>{{valor.nombre}} ({{valor.carta}})</option>
+        {% endfor %}
+    </select>
+</form>
+
+
+
+{% endblock %}

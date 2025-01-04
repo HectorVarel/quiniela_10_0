@@ -1,0 +1,130 @@
+{% extends "principal/base.html" %}
+
+{% block content %}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    /* Clase para la lista vertical */
+    .vertical-list {
+        margin-bottom: 20px; /* Espaciado entre las listas */
+    }
+
+    .vertical-list li {
+        margin-bottom: 8px; /* Espaciado entre elementos en la lista vertical */
+        list-style-type: disc; /* Punto como marcador en la lista vertical */
+    }
+
+    /* Clase para la lista horizontal */
+    .horizontal-list {
+        display: flex;
+        flex-wrap: nowrap; /* No permitir el ajuste de línea */
+        margin-bottom: 20px; /* Espaciado entre las listas */
+    }
+
+    .horizontal-list li {
+        margin-right: 25px; /* Espaciado entre elementos en la lista horizontal */
+    }
+    /* Estilo para el diseño de dos columnas */
+    .container {
+        display: flex;
+    }
+
+    .column {
+        flex: 1;
+        margin-right: 20px; /* Espacio entre la lista y la tabla */
+    }
+
+    /* Ajuste del ancho de la primera columna de la tabla */
+    th {
+        padding: 10px; /* Añadir relleno para mayor claridad */
+    }
+
+    th:first-child {
+        width: 200px; /* Ajusta el valor según tus necesidades */
+    }
+    /* Definir estilos CSS aquí */
+    .celda {
+        padding: 10px; /* Ajustar según sea necesario */
+        border: 1px solid #000; /* Bordes para mejorar la visibilidad */
+    }
+</style>
+<body>
+
+    <h1 style="text-align: center;">Selecciona Jornada</h1>
+
+    <form style = 'text-align: center;'id="jornadaForm" method="post" action="{% url 'jornadas' %}">
+        {% csrf_token %}
+    
+        <label for="opciones">Jornada:</label>
+        <select id="opciones" name="opciones">
+            <option value="1" {% if jornada_actual == 1 %} selected {% endif %}>1</option>
+            <option value="2" {% if jornada_actual == 2 %} selected {% endif %}>2</option>
+            <option value="3" {% if jornada_actual == 3 %} selected {% endif %}>3</option>
+            <option value="4" {% if jornada_actual == 4 %} selected {% endif %}>4</option>
+            <option value="5" {% if jornada_actual == 5 %} selected {% endif %}>5</option>
+            <option value="6" {% if jornada_actual == 6 %} selected {% endif %}>6</option>
+            <option value="7" {% if jornada_actual == 7 %} selected {% endif %}>7</option>
+            <option value="8" {% if jornada_actual == 8 %} selected {% endif %}>8</option>
+            <option value="9" {% if jornada_actual == 9 %} selected {% endif %}>9</option>
+        </select>
+    </form>
+
+    <script>
+        document.getElementById('opciones').addEventListener('change', function() {
+            document.getElementById('jornadaForm').submit();
+        });
+    </script>
+
+    <div class="container">
+        <!-- Columna de la lista -->
+        <div class="column">
+            <table border="1">
+                <thead>
+                    <tr>
+                        {% for dato in datos_procesados %}
+                                <th style="background-color: lightblue;">{{ dato.nombre }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dato in sec_pred %}
+                    <tr>
+                        {% for item in dato.pred %}
+                                <td style="background-color: {{item.1}}; text-align: center;">{{item.0}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Columna de la tabla -->
+        <div class="column">
+            <p> Puntos extra: </p>
+            <div class="list-container">
+            <!-- Lista vertical -->
+            <ul class="vertical-list">
+                {% for el in puntos_extra %}
+                    <li>{{el.nombre}} {{el.puntos_extra}} pts.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+    <!-- Lista horizontal -->
+    <ul class="horizontal-list">
+        <li>OD: Opción Doble</li>
+        <li>OT: Opción Triple</li>
+        <li>DQ: Doble Quiniela</li>
+        <li>M: Multiplicador</li>
+        <li>J: Jugador Gol</li>
+        <li>MA: Marcador</li>
+        <li>RC: Roba Carta</li>
+        <li>IQ: Intercambio de Quiniela</li>
+    </ul>
+
+
+</body>
+
+{% endblock %}
